@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CV Digital Imam Fatkhuroji — Student with an Interest in Graphic Design.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Imam Fatkhuroji — CV Digital</title>
+
+  <style>
+    /* =========================
+       RESET & BASE
+    ========================== */
+    :root {
+      --black: #000000;
+      --white: #ffffff;
+      --text: #111111;
+      --muted: #333333;
+      --light: #f4f4f4;
+      --border: #d9d9d9;
+      --transition: 200ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 32px;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--white);
+      color: var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    ::selection {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--black);
+      outline-offset: 3px;
+    }
+
+    /* Minimal scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--white);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #bcbcbc;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #777777;
+    }
+
+    /* =========================
+       LOADING SCREEN
+    ========================== */
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white);
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 500ms ease, visibility 500ms ease;
+    }
+
+    .loader.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader__inner {
+      width: min(260px, calc(100% - 48px));
+      text-align: center;
+    }
+
+    .loader__mark {
+      font-size: 30px;
+      line-height: 1;
+      font-weight: 600;
+      letter-spacing: -0.04em;
+      margin-bottom: 22px;
+    }
+
+    .loader__text {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .loader__track {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      overflow: hidden;
+    }
+
+    .loader__progress {
+      width: 0;
+      height: 100%;
+      background: var(--black);
+      animation: loadingProgress 2s linear forwards;
+    }
+
+    @keyframes loadingProgress {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    /* =========================
+       HAMBURGER / NAVIGATION
+    ========================== */
+    .menu-toggle {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      z-index: 1001;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle__box {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .menu-toggle__line {
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--black);
+      transform-origin: center;
+      transition: transform 300ms ease, opacity 300ms ease;
+    }
+
+    .menu-toggle.is-open .menu-toggle__line:nth-child(1) {
+      transform: translateY(4px) rotate(45deg);
+    }
+
+    .menu-toggle.is-open .menu-toggle__line:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.is-open .menu-toggle__line:nth-child(3) {
+      transform: translateY(-4px) rotate(-45deg);
+    }
+
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 300ms ease, visibility 300ms ease;
+    }
+
+    .menu-overlay.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .menu-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .menu-link {
+      position: relative;
+      display: inline-block;
+      width: max-content;
+      color: var(--black);
+      font-size: 40px;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      padding: 4px 0;
+    }
+
+    .menu-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--black);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 200ms ease;
+    }
+
+    .menu-link:hover::after,
+    .menu-link.is-active::after {
+      transform: scaleX(1);
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+    .hero {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      padding: 96px 8vw 72px;
+      background: var(--white);
+    }
+
+    .hero__inner {
+      display: flex;
+      align-items: stretch;
+      width: 100%;
+      max-width: 760px;
+    }
+
+    .hero__line {
+      width: 1px;
+      flex: 0 0 1px;
+      background: var(--black);
+      margin-right: 24px;
+      transform-origin: top;
+      transform: scaleY(0);
+      opacity: 0;
+    }
+
+    .hero__content {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .hero__name,
+    .hero__tagline,
+    .hero__actions {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .hero.is-ready .hero__line {
+      animation: heroLineIn 400ms ease-out forwards;
+      animation-delay: 0ms;
+    }
+
+    .hero.is-ready .hero__name {
+      animation: heroItemIn 400ms ease-out forwards;
+      animation-delay: 100ms;
+    }
+
+    .hero.is-ready .hero__tagline {
+      animation: heroItemIn 400ms ease-out forwards;
+      animation-delay: 200ms;
+    }
+
+    .hero.is-ready .hero__actions {
+      animation: heroItemIn 400ms ease-out forwards;
+      animation-delay: 300ms;
+    }
+
+    @keyframes heroLineIn {
+      from {
+        opacity: 0;
+        transform: scaleY(0);
+      }
+      to {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+    }
+
+    @keyframes heroItemIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero__name {
+      font-size: 64px;
+      line-height: 1.05;
+      font-weight: 600;
+      letter-spacing: -0.055em;
+      color: var(--black);
+    }
+
+    .hero__tagline {
+      margin-top: 16px;
+      font-size: 20px;
+      line-height: 1.4;
+      font-weight: 400;
+      color: var(--muted);
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================== */
+    .outline-button {
+      width: 140px;
+      min-height: 48px;
+      padding: 0 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--black);
+      border-radius: 0;
+      background: transparent;
+      color: var(--black);
+      font-size: 14px;
+      line-height: 1;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+
+    .outline-button:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    /* =========================
+       MAIN / SECTIONS
+    ========================== */
+    main {
+      width: 100%;
+    }
+
+    .section {
+      width: 100%;
+      padding: 28px 8vw;
+      scroll-margin-top: 24px;
+    }
+
+    .section-card {
+      width: 100%;
+      padding: 48px;
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 0;
+      transition: border-color 200ms ease;
+    }
+
+    .section-card:hover {
+      border-color: var(--black);
+    }
+
+    .section-heading {
+      margin-bottom: 36px;
+    }
+
+    .section-title {
+      font-size: 48px;
+      line-height: 1.05;
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      color: var(--black);
+    }
+
+    .section-content {
+      width: 100%;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .reveal.is-visible {
+      animation: sectionIn 500ms ease-out forwards;
+    }
+
+    @keyframes sectionIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* =========================
+       ABOUT
+    ========================== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 48px;
+    }
+
+    .about-text {
+      max-width: 720px;
+      font-size: 18px;
+      line-height: 1.75;
+      color: var(--text);
+    }
+
+    .facts {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .fact {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .fact:first-child {
+      padding-top: 0;
+    }
+
+    .fact:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .fact__label {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+      line-height: 1.3;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .fact__value {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--black);
+    }
+
+    /* =========================
+       EDUCATION
+    ========================== */
+    .education-item {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 40px;
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .education-item:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .education-year {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .education-school {
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    .education-stream {
+      margin-top: 8px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    /* =========================
+       ORGANIZATION
+    ========================== */
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .activity-card {
+      padding: 28px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      transition: border-color 200ms ease;
+    }
+
+    .activity-card:hover {
+      border-color: var(--black);
+    }
+
+    .activity-card.reveal.is-visible:nth-child(1) {
+      animation-delay: 0ms;
+    }
+
+    .activity-card.reveal.is-visible:nth-child(2) {
+      animation-delay: 100ms;
+    }
+
+    .activity-title {
+      font-size: 25px;
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    .activity-role {
+      margin-top: 8px;
+      font-size: 16px;
+      color: var(--muted);
+    }
+
+    .activity-meta {
+      margin-top: 18px;
+      display: grid;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .activity-meta strong {
+      color: var(--black);
+      font-weight: 500;
+    }
+
+    /* =========================
+       INTEREST
+    ========================== */
+    .interest {
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+    }
+
+    .interest-label {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .interest-title {
+      font-size: clamp(56px, 10vw, 112px);
+      line-height: 0.92;
+      font-weight: 600;
+      letter-spacing: -0.07em;
+      color: var(--black);
+    }
+
+    /* =========================
+       CONTACT
+    ========================== */
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .contact-item {
+      width: max-content;
+      max-width: 100%;
+      font-size: 20px;
+      color: var(--black);
+      border-bottom: 1px solid transparent;
+    }
+
+    .contact-item:hover {
+      border-bottom-color: var(--black);
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+    .footer {
+      margin-top: 28px;
+      padding: 56px 8vw;
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .footer__inner {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__name {
+      font-size: 24px;
+      line-height: 1.2;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    .footer__contact {
+      color: #dddddd;
+      font-size: 15px;
+    }
+
+    .footer__copy {
+      margin-top: 20px;
+      color: #aaaaaa;
+      font-size: 13px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+    @media (max-width: 1023px) {
+      .hero {
+        padding-left: 8vw;
+        padding-right: 8vw;
+      }
+
+      .hero__name {
+        font-size: 52px;
+      }
+
+      .section-card {
+        padding: 40px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+      }
+
+      .section-title {
+        font-size: 44px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .menu-toggle {
+        top: 24px;
+        left: 24px;
+      }
+
+      .menu-link {
+        font-size: 40px;
+      }
+
+      .hero {
+        min-height: 100svh;
+        padding: 88px 8vw 56px;
+      }
+
+      .hero__name {
+        font-size: 40px;
+        letter-spacing: -0.05em;
+      }
+
+      .hero__tagline {
+        font-size: 18px;
+      }
+
+      .hero__actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .outline-button {
+        width: 140px;
+        min-height: 48px;
+      }
+
+      .section {
+        padding: 16px 5vw;
+      }
+
+      .section-card {
+        padding: 28px;
+      }
+
+      .section-heading {
+        margin-bottom: 28px;
+      }
+
+      .section-title {
+        font-size: 40px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .about-text {
+        font-size: 16px;
+      }
+
+      .education-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .education-school {
+        font-size: 24px;
+      }
+
+      .activity-card {
+        padding: 22px;
+      }
+
+      .activity-title {
+        font-size: 22px;
+      }
+
+      .interest {
+        min-height: 240px;
+      }
+
+      .interest-title {
+        font-size: 18vw;
+      }
+
+      .contact-item {
+        width: 100%;
+        overflow-wrap: anywhere;
+        font-size: 18px;
+      }
+
+      .contact-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .contact-actions .outline-button {
+        width: 100%;
+      }
+
+      .footer {
+        margin-top: 16px;
+        padding: 44px 5vw;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .loader__progress {
+        width: 100%;
+      }
+
+      .reveal,
+      .hero__name,
+      .hero__tagline,
+      .hero__actions,
+      .hero__line {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- =========================
+       LOADING
+  ========================== -->
+  <div class="loader" id="loader" aria-label="Memuat halaman">
+    <div class="loader__inner">
+      <div class="loader__mark">IF</div>
+      <div class="loader__text">Loading...</div>
+      <div class="loader__track" aria-hidden="true">
+        <div class="loader__progress"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================
+       HAMBURGER
+  ========================== -->
+  <button
+    class="menu-toggle"
+    id="menuToggle"
+    type="button"
+    aria-label="Buka menu"
+    aria-expanded="false"
+    aria-controls="menuOverlay"
+  >
+    <span class="menu-toggle__box" aria-hidden="true">
+      <span class="menu-toggle__line"></span>
+      <span class="menu-toggle__line"></span>
+      <span class="menu-toggle__line"></span>
+    </span>
+  </button>
+
+  <!-- =========================
+       FULLSCREEN MENU
+  ========================== -->
+  <div class="menu-overlay" id="menuOverlay">
+    <nav class="menu-nav" aria-label="Navigasi utama">
+      <a class="menu-link is-active" href="#home">HOME</a>
+      <a class="menu-link" href="#about">ABOUT</a>
+      <a class="menu-link" href="#education">EDUCATION</a>
+      <a class="menu-link" href="#organization">ORGANIZATION</a>
+      <a class="menu-link" href="#interest">INTEREST</a>
+      <a class="menu-link" href="#contact">CONTACT</a>
+    </nav>
+  </div>
+
+  <!-- =========================
+       HERO
+  ========================== -->
+  <header class="hero" id="home">
+    <div class="hero__inner">
+      <div class="hero__line" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <h1 class="hero__name">IMAM FATKHUROJI</h1>
+
+        <p class="hero__tagline">
+          Student with an Interest in Graphic Design
+        </p>
+
+        <div class="hero__actions">
+          <a class="outline-button" href="#about">LIHAT CV</a>
+          <a class="outline-button" href="#contact">HUBUNGI SAYA</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- =========================
+         ABOUT
+    ========================== -->
+    <section class="section" id="about">
+      <div class="section-card reveal">
+        <div class="section-heading">
+          <h2 class="section-title">ABOUT ME</h2>
+        </div>
+
+        <div class="section-content about-grid">
+          <div>
+            <p class="about-text">
+              Saya adalah pelajar kelas XII di SMA Gunung Madu yang cukup mudah
+              beradaptasi dan memiliki rasa tanggung jawab dalam menjalankan
+              tugas. Saya memiliki ketertarikan pada bidang desain dan mulai
+              mengembangkan kemampuan di bidang teknologi melalui pengalaman
+              membuat website. Ke depannya, saya ingin melanjutkan pendidikan
+              ke perguruan tinggi sekaligus mengembangkan kemampuan dan
+              pengalaman di dunia kerja.
+            </p>
+          </div>
+
+          <div class="facts" aria-label="Informasi singkat">
+            <div class="fact">
+              <span class="fact__label">STATUS</span>
+              <span class="fact__value">Pelajar</span>
+            </div>
+
+            <div class="fact">
+              <span class="fact__label">SEKOLAH</span>
+              <span class="fact__value">SMA Gunung Madu</span>
+            </div>
+
+            <div class="fact">
+              <span class="fact__label">KELAS</span>
+              <span class="fact__value">XII</span>
+            </div>
+
+            <div class="fact">
+              <span class="fact__label">MINAT</span>
+              <span class="fact__value">Desain Grafis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         EDUCATION
+    ========================== -->
+    <section class="section" id="education">
+      <div class="section-card reveal">
+        <div class="section-heading">
+          <h2 class="section-title">EDUCATION</h2>
+        </div>
+
+        <div class="section-content">
+          <article class="education-item">
+            <div class="education-year">2024 — 2027</div>
+
+            <div>
+              <h3 class="education-school">SMA GUNUNG MADU</h3>
+              <p class="education-stream">IPA/IPS · Kelas XII</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         ORGANIZATION
+    ========================== -->
+    <section class="section" id="organization">
+      <div class="section-card reveal">
+        <div class="section-heading">
+          <h2 class="section-title">ORGANIZATION &amp; ACTIVITIES</h2>
+        </div>
+
+        <div class="section-content activity-list">
+          <article class="activity-card reveal">
+            <h3 class="activity-title">PERSAUDARAAN SETIA HATI TERATE</h3>
+            <p class="activity-role">Anggota</p>
+
+            <div class="activity-meta">
+              <span><strong>Periode:</strong> Desember 2022–2024</span>
+            </div>
+          </article>
+
+          <article class="activity-card reveal">
+            <h3 class="activity-title">ASHABUL KAHFI</h3>
+            <p class="activity-role">Anggota — Juara 1 Lomba Hadroh</p>
+
+            <div class="activity-meta">
+              <span><strong>Tahun:</strong> 2023</span>
+              <span><strong>Tingkat:</strong> Perusahaan</span>
+              <span><strong>Tempat/penyelenggara:</strong> PT Gunung Madu Plantation</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         INTEREST
+    ========================== -->
+    <section class="section" id="interest">
+      <div class="section-card reveal interest">
+        <div class="section-content">
+          <p class="interest-label">MY INTEREST</p>
+          <h2 class="interest-title">DESAIN<br>GRAFIS</h2>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         CONTACT
+    ========================== -->
+    <section class="section" id="contact">
+      <div class="section-card reveal">
+        <div class="section-heading">
+          <h2 class="section-title">CONTACT</h2>
+        </div>
+
+        <div class="section-content">
+          <div class="contact-list">
+            <a class="contact-item" href="mailto:imamaxzy@gmail.com">
+              imamaxzy@gmail.com
+            </a>
+
+            <a
+              class="contact-item"
+              href="https://wa.me/6282183199286"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              082183199286
+            </a>
+          </div>
+
+          <div class="contact-actions">
+            <a class="outline-button" href="mailto:imamaxzy@gmail.com">
+              EMAIL SAYA
+            </a>
+
+            <a
+              class="outline-button"
+              href="https://wa.me/6282183199286"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WHATSAPP
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__name">IMAM FATKHUROJI</div>
+      <div class="footer__contact">imamaxzy@gmail.com</div>
+      <div class="footer__contact">082183199286</div>
+      <div class="footer__copy">© 2026 Imam Fatkhuroji</div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const loader = document.getElementById("loader");
+      const hero = document.getElementById("home");
+      const menuToggle = document.getElementById("menuToggle");
+      const menuOverlay = document.getElementById("menuOverlay");
+      const menuLinks = [...document.querySelectorAll(".menu-link")];
+      const revealElements = [...document.querySelectorAll(".reveal")];
+
+      let menuOpen = false;
+
+      // Loading: exactly 2 seconds, then 500ms fade out.
+      window.setTimeout(() => {
+        loader.classList.add("is-hidden");
+
+        // Start Hero only after the loading screen has finished fading.
+        window.setTimeout(() => {
+          hero.classList.add("is-ready");
+        }, 500);
+      }, 2000);
+
+      // Menu
+      function openMenu() {
+        menuOpen = true;
+        menuToggle.classList.add("is-open");
+        menuOverlay.classList.add("is-open");
+        document.body.classList.add("menu-open");
+
+        menuToggle.setAttribute("aria-expanded", "true");
+        menuToggle.setAttribute("aria-label", "Tutup menu");
+      }
+
+      function closeMenu() {
+        menuOpen = false;
+        menuToggle.classList.remove("is-open");
+        menuOverlay.classList.remove("is-open");
+        document.body.classList.remove("menu-open");
+
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Buka menu");
+      }
+
+      menuToggle.addEventListener("click", () => {
+        if (menuOpen) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      // Selecting a menu item closes the menu.
+      menuLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          closeMenu();
+        });
+      });
+
+      // Keyboard support.
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && menuOpen) {
+          closeMenu();
+          menuToggle.focus();
+        }
+      });
+
+      // Reveal sections once, including staggered organization cards.
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+
+              entry.target.classList.add("is-visible");
+              obs.unobserve(entry.target);
+            });
+          },
+          {
+            threshold: 0.12,
+            rootMargin: "0px 0px -40px 0px"
+          }
+        );
+
+        revealElements.forEach((element) => observer.observe(element));
+      } else {
+        revealElements.forEach((element) => {
+          element.classList.add("is-visible");
+        });
+      }
+
+      // Active navigation based on the current section.
+      const sections = [...document.querySelectorAll("header[id], main section[id]")];
+
+      if ("IntersectionObserver" in window) {
+        const navObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+
+              const id = entry.target.id;
+
+              menuLinks.forEach((link) => {
+                link.classList.toggle(
+                  "is-active",
+                  link.getAttribute("href") === "#" + id
+                );
+              });
+            });
+          },
+          {
+            threshold: 0.35,
+            rootMargin: "-15% 0px -55% 0px"
+          }
+        );
+
+        sections.forEach((section) => navObserver.observe(section));
+      }
+    });
+  </script>
+</body>
+</html>
